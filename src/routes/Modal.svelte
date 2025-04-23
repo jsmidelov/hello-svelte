@@ -12,6 +12,8 @@
         rating: 0,
         images: []
     };
+    // I bet the loaded content "lags" one request because I'm using an effect, which likely executes post-render like in react
+    // Question is, what do I use instead of an effect?
     $effect(() => {
         const fetchDetails = async () => {
             const cache = get(productDetailsCache);
@@ -43,17 +45,19 @@
 
 </script>
 {#if selected}
-    <dialog id="dialog" open>
-        <h1>{details.title}</h1>
-        <img
-            src={details.images[0]}
-            alt=''
-            width="300"
-            height="300" />
-        <p>{details.description}</p>
-        <form method="dialog">
-            <button type="submit" onclick={closeModal}>Close</button>
-        </form>
+    <dialog class="modal" id="dialog" open>
+        <div class="modal-box">
+            <h1 class="text-lg font-bold">{details.title}</h1>
+            <img
+                src={details.images[0]}
+                alt=''
+                width="300"
+                height="300" />
+            <p>{details.description}</p>
+            <form class="modal-action" method="dialog">
+                <button class="btn" type="submit" onclick={closeModal}>Close</button>
+            </form>
+        </div>
     </dialog>
 {/if}
 

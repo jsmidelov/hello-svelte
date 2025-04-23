@@ -3,6 +3,7 @@ import { svelteTesting } from '@testing-library/svelte/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 
+// Ignore the tailwindcss warning, it seems to be just fine!
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	test: {
