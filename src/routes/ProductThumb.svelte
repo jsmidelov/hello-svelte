@@ -1,15 +1,16 @@
 <script lang="ts">
     let {
-        id = 0,
         title = '',
         thumbnail = '',
-    } = $props();
+        prefetch,
+        onclick,
+    } = $props();    
 </script>
 
-<article>
+<article onmouseover={prefetch} onfocus={prefetch} >
     <img src="{thumbnail}" alt="{title}" />
     <p>{title}</p>
-    <button>Read more</button>
+    <button {onclick}>Read more</button>
 </article>
 
 <style>
