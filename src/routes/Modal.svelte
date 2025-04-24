@@ -12,15 +12,13 @@
         rating: 0,
         images: []
     };
-    // The loaded content "lags" one request because I'm using an effect, which likely executes post-render like in react
-    // Question is, what do I use instead of an effect?
+    
     $effect(() => {
         const fetchDetails = async () => {
             const cache = get(productDetailsCache);
             if (cache[selected]) {
                 details = cache[selected];
             } else {
-                // Fetch from API and cache it
                 if (!selected) {
                     return; 
                 }
