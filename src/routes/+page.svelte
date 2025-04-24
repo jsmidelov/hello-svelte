@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProductThumb from './ProductThumb.svelte';
+	import ProductCard from './ProductCard.svelte';'./ProductCard.svelte';
 	import type { ProductThumbnail } from './+page';
 	// import { productDetailsCache } from "$lib/stores/products";
 	// import { get } from "svelte/store";
@@ -98,7 +98,7 @@
 
 <section bind:this={root}>
 	{#each products as product}
-		<ProductThumb prefetch={() => prefetch(product.id)} onclick={() => openModal(product.id)} {...product} />
+		<ProductCard prefetch={() => prefetch(product.id)} onclick={() => openModal(product.id)} {...product} />
 	{/each}
 </section>
 <Modal selected={selected} closeModal={closeModal} />
