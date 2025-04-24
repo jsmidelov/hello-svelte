@@ -28,7 +28,9 @@ pnpm run dev
 ## Known issues
 
 - Fetching the individual item "lags" one step behind the card the user clicks. This is because it uses an effect, which executes post-render. However, I'm yet to figure out what to use in order to pass down the id from the page to the modal and fetch it (unless I move the function to the page, perhaps?)
-
-- Passing down the fetched collection from +page.ts to page.svelte has some issue I've been unable to resolve. As a work-around, I've left a response commented in the page.svelte.
-
 - Something I've done has messed up the benefits I wanted from the dialog element 😢
+
+## Reflection
+
+- In this moment of AI models breaking through by the day, I've turned to github co-pilot as a debugging partner. Let's just say it's been more than a little annoying it seems unaware of Svelte 5's runes syntax, and consistently recommend using deprecated or incompatible solutions, despite being provided the required documentation.
+- Passing down the fetched collection from +page.ts to page.svelte turned out a real eye-sore, in part due to the above, in part due to SvelteKit had also changed it's syntax with SvelteKit 2.12. This issue alone probably took 90% of my time making this little demo.

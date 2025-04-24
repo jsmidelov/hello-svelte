@@ -12,7 +12,7 @@
         rating: 0,
         images: []
     };
-    // I bet the loaded content "lags" one request because I'm using an effect, which likely executes post-render like in react
+    // The loaded content "lags" one request because I'm using an effect, which likely executes post-render like in react
     // Question is, what do I use instead of an effect?
     $effect(() => {
         const fetchDetails = async () => {
