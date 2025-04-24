@@ -1,7 +1,14 @@
 <script lang="ts">
 	import ProductThumb from './ProductThumb.svelte';
 	import type { ProductThumbnail } from './+page';
-	// let {products} = $props();
+	// import { productDetailsCache } from "$lib/stores/products";
+	// import { get } from "svelte/store";
+	import Modal from './Modal.svelte';
+	interface Props {
+		products: ProductThumbnail[];
+	}
+	// let {products}:Props = $props();
+	// console.log('products: ', products);
 	let products:ProductThumbnail[] = [
     {
         "id": 1,
@@ -54,7 +61,34 @@
         "thumbnail": "https://cdn.dummyjson.com/products/images/fragrances/Gucci%20Bloom%20Eau%20de/thumbnail.png"
     }
 ];
-	console.log(products);
+
+	let selected:number|null = $state(null);
+	let root:HTMLElement;
+	const openModal = (id:number) => {
+		const dialog = root?.querySelector('dialog');
+		if (dialog) {
+			dialog.showModal();
+		}
+		selected = id;
+	}
+	const prefetch = async(id:number) => {
+	// 	const cache = get(productDetailsCache);
+    //     if (cache[id]) {
+    //         return;
+    //     } else {
+    //         // Fetch from API and cache it
+    //         const response = await fetch(`https://dummyjson.com/products/${id}`);
+    //         const product = await response.json();
+    //         productDetailsCache.update((cache) => {
+    //             cache[id] = product;
+    //             return cache;
+    //         });
+    //     }
+	}
+	const closeModal = (e: Event) => {
+		e.preventDefault();
+		selected = null;
+	};
 </script>
 
 <svelte:head>
@@ -62,35 +96,20 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
-	<!-- <Counter /> -->
-	<div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center">
-		{#each products as product}
-			<ProductThumb {...product} />
-		{/each}
-	</div>
-	<dialog id="dialog">
-		<h1>Fruit</h1>
-		<img
-				src="src/lib/images/banana-fruit.png"
-				alt="Svelte logo"
-				width="300"
-				height="300" />
-		<p>The description about the selected fruit</p>
-		<button id="close">Close</button>
-	</dialog>
+<section bind:this={root}>
+	{#each products as product}
+		<ProductThumb prefetch={() => prefetch(product.id)} onclick={() => openModal(product.id)} {...product} />
+	{/each}
 </section>
+<Modal selected={selected} closeModal={closeModal} />
 
 <style>
 	section {
 		display: flex;
-		flex-direction: column;
+		flex-wrap: wrap;
+		gap: 1rem;
 		justify-content: center;
 		align-items: center;
 		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
 	}
 </style>
