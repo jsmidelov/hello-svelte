@@ -2,12 +2,11 @@
     let {
         title = '',
         thumbnail = '',
-        prefetch,
         onclick,
     } = $props();    
 </script>
 
-<article class="card bg-base-100 w-96 shadow-lg" onmouseover={prefetch} onfocus={prefetch} >
+<article class="card bg-base-100 w-96 shadow-lg">
     <figure>
         <img src="{thumbnail}" alt="{title}" />
     </figure>

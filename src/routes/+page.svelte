@@ -1,14 +1,11 @@
 <script lang="ts">
 	import ProductCard from './ProductCard.svelte';'./ProductCard.svelte';
 	import type { ProductThumbnail } from './+page';
-	// import { productDetailsCache } from "$lib/stores/products";
-	// import { get } from "svelte/store";
 	import Modal from './Modal.svelte';
 	interface Props {
 		products: ProductThumbnail[];
 	}
 	// let {products}:Props = $props();
-	// console.log('products: ', products);
 	let products:ProductThumbnail[] = [
     {
         "id": 1,
@@ -71,20 +68,6 @@
 		}
 		selected = id;
 	}
-	const prefetch = async(id:number) => {
-	// 	const cache = get(productDetailsCache);
-    //     if (cache[id]) {
-    //         return;
-    //     } else {
-    //         // Fetch from API and cache it
-    //         const response = await fetch(`https://dummyjson.com/products/${id}`);
-    //         const product = await response.json();
-    //         productDetailsCache.update((cache) => {
-    //             cache[id] = product;
-    //             return cache;
-    //         });
-    //     }
-	}
 	const closeModal = (e: Event) => {
 		e.preventDefault();
 		selected = null;
@@ -98,7 +81,7 @@
 
 <section bind:this={root}>
 	{#each products as product}
-		<ProductCard prefetch={() => prefetch(product.id)} onclick={() => openModal(product.id)} {...product} />
+		<ProductCard onclick={() => openModal(product.id)} {...product} />
 	{/each}
 </section>
 <Modal selected={selected} closeModal={closeModal} />
