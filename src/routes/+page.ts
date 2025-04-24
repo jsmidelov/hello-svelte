@@ -15,7 +15,6 @@ export const load: PageLoad = async ({ fetch }) => {
             );
             const json = await response.json();
             cachedProducts = json.products as ProductThumbnail[];
-            console.log("Fetched products:", cachedProducts);
         } catch (error) {
             console.error("Failed to fetch products:", error);
         }
