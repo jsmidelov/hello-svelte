@@ -1,38 +1,34 @@
-# sv
+# About
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+This is a minor project to get familiar with Svelte, SvelteKit, and a bit with Tailwind and DaisyUI.
 
-## Creating a project
+## Getting started
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+The project uses pnpm for package management, so assuming you have pnpm installed, it should be sufficient to run "pnpm install".
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+# install all dependencies
+pnpm install
 ```
 
-## Building
-
-To create a production version of your app:
+From there, all commands you need are in the package.json. Just remember to run them through pnpm!
 
 ```bash
-npm run build
+# Run the project in development environment
+pnpm run dev
 ```
 
-You can preview the production build with `npm run preview`.
+## Considerations
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+- I have intentionally tried to keep the card and modal into separate components, since they're responsible for different things. Keeping these lines clean cut has been something of a challenge, but I imagine a proper state manager could solve much of that (Sveltekit seems to have one, haven't got sure if it's sufficient).
+- I went with the dialog element to "automatically" get the tab focus, close-with-escape and close-on-outside-click.
+- I have been as frugal as possible with element nesting, i.e. used no divs that didn't serve a role.
+- Until I added tailwind and daisy, I used semantic as far as was sensible, and could have expanded with custom elements had I wanted to. I'm personally fond of querying the element with the occasional custom attribute or class (when an element is, you know, an "instance" of a class!) to apply styling, and haven't been overly enthused by tailwind's class spamming. Daisy correct this to some extent, but I still find we're back in Bootstrap with it.
+
+## Known issues
+
+- Fetching the individual item "lags" one step behind the card the user clicks. This is because it uses an effect, which executes post-render. However, I'm yet to figure out what to use in order to pass down the id from the page to the modal and fetch it (unless I move the function to the page, perhaps?)
+
+- Passing down the fetched collection from +page.ts to page.svelte has some issue I've been unable to resolve. As a work-around, I've left a response commented in the page.svelte.
+
+- Something I've done has messed up the benefits I wanted from the dialog element 😢
