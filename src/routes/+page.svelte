@@ -2,19 +2,20 @@
 	import ProductCard from './ProductCard.svelte';'./ProductCard.svelte';
 	import Modal from './Modal.svelte';
 	import { page } from '$app/state';
+	import { state } from '$lib/sharedState.svelte';
 
-	let selected:number|null = $state(null);
+	// export const selected:number|null = $state({selected:null});
 	let root:HTMLElement;
 	const openModal = (id:number) => {
 		const dialog = root?.querySelector('dialog');
 		if (dialog) {
 			dialog.showModal();
 		}
-		selected = id;
+		state.selected = id;
 	}
 	const closeModal = (e: Event) => {
 		e.preventDefault();
-		selected = null;
+		state.selected = 0;
 	};
 </script>
 
@@ -28,7 +29,7 @@
 		<ProductCard onclick={() => openModal(product.id)} {...product} />
 	{/each}
 </section>
-<Modal selected={selected} closeModal={closeModal} />
+<Modal closeModal={closeModal} />
 
 <style>
 	section {
