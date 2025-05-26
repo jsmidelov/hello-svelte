@@ -4,7 +4,6 @@
 	import { page } from '$app/state';
 	import { state } from '$lib/sharedState.svelte';
 
-	// export const selected:number|null = $state({selected:null});
 	let root:HTMLElement;
 	const openModal = (id:number) => {
 		const dialog = root?.querySelector('dialog');
