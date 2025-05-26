@@ -27,7 +27,6 @@ pnpm run dev
 
 ## Known issues
 
-- Fetching the individual item "lags" one step behind the card the user clicks. This is because it uses an effect, which executes post-render. However, I'm yet to figure out what to use in order to pass down the id from the page to the modal and fetch it (unless I move the function to the page, perhaps?)
 - Something I've done has messed up the benefits I wanted from the dialog element 😢
 
 ## Reflection
